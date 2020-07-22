@@ -1,18 +1,27 @@
-class FilterObject {
+export class FilterObject {
   constructor(
     private col: string,
     private ope: string,
-    private keysearch: string
+    private key: string
   ) {}
 
   set colValue(value: string) {
     this.col = value;
   }
+  get colValue(): string {
+    return this.col;
+  }
   set opeValue(value: string) {
     this.ope = value;
   }
-  set keysearchValue(value: string) {
-    this.keysearch = value;
+  get opeValue() {
+    return this.ope;
+  }
+  set keyValue(value: string) {
+    this.key = value;
+  }
+  get keyValue() {
+    return this.key;
   }
 
   valide(): boolean {
@@ -22,30 +31,30 @@ class FilterObject {
       return 
         this.col && this.col.length > 0 &&
         this.ope && this.ope.length > 0 &&
-        this.keysearch && this.keysearch.length > 0;
+        this.key && this.key.length > 0;
     }
   }
 
   complete(): boolean {
-    return this.keysearch && this.keysearch.length > 0;
+    return this.key && this.key.length > 0;
   }
 
   freeColumn(): boolean {
-    return !this.col && this.keysearch && this.complete();
+    return !this.col && this.key && this.complete();
   }
 
   onColumn(): boolean {
-    return this.col && this.ope && this.keysearch && this.complete();
+    return this.col && this.ope && this.key && this.complete();
   }
 }
 
-class Filters {
+export class Filters {
   constructor(
-    private list: Array<FilterObject>,
-    private mode: 'and' | 'or'
-  ){}
+    private list: Array<FilterObject> = [],
+    private mode: 'and' | 'or' = 'and'
+  ) {}
 
-  get filters() {
+  get filterList() {
     return this.list;
   }
 

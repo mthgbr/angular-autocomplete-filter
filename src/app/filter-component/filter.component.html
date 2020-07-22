@@ -1,26 +1,21 @@
 <form class="filter-form-object">
     <ol>
-        <li *ngFor="let filter of filterList.list; let i = index" class="filter-container">
+        <li *ngFor="let filter of filters.filterList; let i = index" class="filter-container">
             <div [attr.filter-index]="i" class="filter-object">
-                <div class="filter-label col" *ngIf="filter.col">
-                    {{filter.col}}
+                <div class="filter-label col" *ngIf="filter.colValue">
+                    {{filter.colValue}}
                 </div>
-                <div class="filter-label operator" *ngIf="filter.operator">
-                    {{filter.operator}}
+                <div class="filter-label operator" *ngIf="filter.opeValue">
+                    {{filter.opeValue}}
                 </div>
-                <div class="filter-label value" *ngIf="filter.value" (click)="editFilterObject(i)">
-                    {{filter.value}}
+                <div class="filter-label value" *ngIf="filter.keyValue">
+                    {{filter.keyValue}}
                 </div>
-                <div class="filter-label remove" *ngIf="filter.value" (click)="removeFilterObject(i)">
-                    <mat-icon>close</mat-icon>
+                <div class="filter-label remove" *ngIf="filter.keyValue" (click)="removeFilter(i)">
+                    
                 </div>
-                <div *ngIf="filterList.state !== 'confirmed'">
+                <div *ngIf="!filters.complete()">
                     <input type="text" [formControl]="formControl" [matAutocomplete]="filter" (keyup)="formValidation($event)" placeholder="Add filter">
-                    <mat-autocomplete #filter="matAutocomplete">
-                        <mat-option *ngFor="let option of formAutocomplete" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
                 </div>
             </div>
         </li>
