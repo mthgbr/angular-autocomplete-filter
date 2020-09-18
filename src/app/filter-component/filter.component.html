@@ -15,7 +15,7 @@
                     
                 </div>
                 <div *ngIf="!filters.complete()">
-                    <input type="text" [formControl]="formControl" [matAutocomplete]="filter" (keyup)="formValidation($event)" placeholder="Add filter">
+                    <input type="text" [formControl]="formControl" (keyup)="formValidation($event)" placeholder="Add filter">
                 </div>
             </div>
         </li>
